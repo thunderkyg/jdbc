@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookSelectApp {
+public class AuthorSelectOneApp {
 	
 	public static void main(String[] args) {
 		
@@ -25,12 +25,11 @@ public class BookSelectApp {
 
 		    // 3. SQL문 준비 / 바인딩 / 실행
 			String query = "";						//쿼리문 문자열로 만들기 --> ? 주의
-			query += " select  book_id, ";
-			query += " 		   title, ";
-			query += " 		   pubs, ";
-			query += " 		   pub_date, ";
-			query += " 		   author_id ";
-			query += " from book ";
+			query += " select  author_id, ";
+			query += " 		   author_name, ";
+			query += " 		   author_desc ";
+			query += " from author ";
+			query += " where author_id = 1 ";
 			
 		    pstmt = conn.prepareStatement(query);
 		    rs = pstmt.executeQuery();
@@ -38,13 +37,11 @@ public class BookSelectApp {
 		    
 		    // 4.결과처리
 		    while(rs.next()) {
-		    	int bookId = rs.getInt("book_id");
-		    	String title = rs.getString("title");
-		    	String pubs = rs.getString("pubs");
-		    	String pubDate = rs.getString("pub_date");
 		    	int authorId = rs.getInt("author_id");
+		    	String authorName = rs.getString("author_name");
+		    	String authorDesc = rs.getString("author_desc");
 		    	
-		    	System.out.println(bookId+ ", " + title + ", " + pubs + ", " + pubDate + ", " + authorId + ", ");
+		    	System.out.println(authorId + "," + authorName + ", " + authorDesc);
 		    	
 		    }
 

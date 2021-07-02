@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookSelectApp {
+public class BookSelectOneApp {
 	
 	public static void main(String[] args) {
 		
@@ -31,6 +31,7 @@ public class BookSelectApp {
 			query += " 		   pub_date, ";
 			query += " 		   author_id ";
 			query += " from book ";
+			query += " where book_id = 5 ";
 			
 		    pstmt = conn.prepareStatement(query);
 		    rs = pstmt.executeQuery();

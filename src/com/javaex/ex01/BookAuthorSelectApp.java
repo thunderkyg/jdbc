@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookSelectOneApp {
+public class BookAuthorSelectApp {
 	
 	public static void main(String[] args) {
 		
@@ -29,9 +29,11 @@ public class BookSelectOneApp {
 			query += " 		   title, ";
 			query += " 		   pubs, ";
 			query += " 		   pub_date, ";
-			query += " 		   author_id ";
-			query += " from book ";
-			query += " where book_id = 5 ";
+			query += " 		   bo.author_id, ";
+			query += " 		   author_name, ";
+			query += " 		   author_desc ";
+			query += " from book bo, author au ";
+			query += " where bo.author_id = au.author_id ";
 			
 		    pstmt = conn.prepareStatement(query);
 		    rs = pstmt.executeQuery();
@@ -44,8 +46,10 @@ public class BookSelectOneApp {
 		    	String pubs = rs.getString("pubs");
 		    	String pubDate = rs.getString("pub_date");
 		    	int authorId = rs.getInt("author_id");
+		    	String authorName = rs.getString("author_name");
+		    	String authorDesc = rs.getString("author_desc");
 		    	
-		    	System.out.println(bookId+ ", " + title + ", " + pubs + ", " + pubDate + ", " + authorId);
+		    	System.out.println(bookId+ ", " + title + ", " + pubs + ", " + pubDate + ", " + authorId + ", " + authorName + ", " + authorDesc);
 		    	
 		    }
 

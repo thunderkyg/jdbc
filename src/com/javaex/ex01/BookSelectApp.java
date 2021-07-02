@@ -44,7 +44,7 @@ public class BookSelectApp {
 		    	String pubDate = rs.getString("pub_date");
 		    	int authorId = rs.getInt("author_id");
 		    	
-		    	System.out.println(bookId+ ", " + title + ", " + pubs + ", " + pubDate + ", " + authorId + ", ");
+		    	System.out.println(bookId+ ", " + title + ", " + pubs + ", " + pubDate + ", " + authorId);
 		    	
 		    }
 

@@ -7,7 +7,6 @@ public class AuthorVo {
 	private String authorName;
 	private String authorDesc;
 	
-	
 	// 생성자
 	public AuthorVo() {
 	}
@@ -53,4 +52,4 @@ public class AuthorVo {
 	public String toString() {
 		return "AuthorVo [authorId=" + authorId + ", authorName=" + authorName + ", authorDesc=" + authorDesc + "]";
 	}
-}
+} 

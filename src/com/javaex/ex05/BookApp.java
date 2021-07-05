@@ -1,13 +1,20 @@
 package com.javaex.ex05;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookApp {
 
 	public static void main(String[] args) {
 
+		BookDao bookDao = new BookDao();
+		AuthorDao authorDao = new AuthorDao();
+		List <BookVo> bookList = new ArrayList<BookVo>();
+		List <AuthorVo> authorList = new ArrayList<AuthorVo>();
+		
 		//작가 테이블 책 테이블 완성
 		
 		//작가 테이블 시퀀스, 책 테이블 시퀀스 완성
-		
 		
 		//authorDao.authorInsert(); 작가6명 추가
 		

@@ -84,6 +84,7 @@ public class BookDao {
 			query += "     pub_date = ?, ";
 			query += "     author_id = ?, ";
 			query += " where book_id = ? ";
+			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, bookVo.getTitle());
 			pstmt.setString(2, bookVo.getPubs());
@@ -109,7 +110,7 @@ public class BookDao {
 		try {
 			String query = "";
 			query += " insert into book ";
-			query += " values(seq_book_id.nextval, ?, ?, ?, ? ";
+			query += " values(seq_book_id.nextval, ?, ?, ?, ?) ";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, bookVo.getTitle());
 			pstmt.setString(2, bookVo.getPubs());
@@ -142,11 +143,11 @@ public class BookDao {
 			query += "		 title, ";
 			query += "       pubs, ";
 			query += "       pub_date, ";
-			query += "       author_id ";
-			query += " from Book ";
+			query += "       author_name ";
+			query += " from book bo, author au ";
+			query += " where bo.author_id = au.author_id ";
 			
 			pstmt = conn.prepareStatement(query);
-			
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -154,9 +155,9 @@ public class BookDao {
 				String Title = rs.getString("title");
 				String Pubs = rs.getString("pubs");
 				String pubDate = rs.getString("pub_date");
-				int authorId = rs.getInt("author_id");
+				String authorName = rs.getString("author_name");
 
-				BookVo bookVo = new BookVo(bookId, Title, Pubs, pubDate, authorId);
+				BookVo bookVo = new BookVo(bookId, Title, Pubs, pubDate, authorName);
 
 				arrayList.add(bookVo);
 			}
@@ -168,7 +169,7 @@ public class BookDao {
 	}
 	
 	//Search
-	public List<BookVo> bookSearch() {
+	public List<BookVo> bookSearch(String search) {
 
 		// DB에서 리스트 가져옴
 		List<BookVo> arrayList = new ArrayList<BookVo>();
@@ -182,13 +183,19 @@ public class BookDao {
 			query += "		 title, ";
 			query += "       pubs, ";
 			query += "       pub_date, ";
-			query += "       author_id ";
-			query += " from Book ";
-			query += " where book_id like '%삼%' ";
-			query += " or title like '%삼%' ";
-			query += " or pubs like '%삼%' ";
-			query += " or pub_date like '%삼%' ";
-			query += " or author_id like '%삼%' ";
+			query += "       author_name ";
+			query += " from (select book_id, "
+					+ "				title, "
+					+ "				pubs, "
+					+ "				pub_date, "
+					+ "				author_name "
+					+ " from book bo, author au "
+					+ " where bo.author_id = au.author_id) " ;
+			query += " where book_id like '%" + search + "%'";
+			query += " or title like '%" + search + "%'";
+			query += " or pubs like '%" + search + "%'";
+			query += " or pub_date like '%" + search + "%'";
+			query += " or author_name like '%" + search + "%'";
 			
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
@@ -198,9 +205,9 @@ public class BookDao {
 				String Title = rs.getString("title");
 				String Pubs = rs.getString("pubs");
 				String pubDate = rs.getString("pub_date");
-				int authorId = rs.getInt("author_id");
+				String authorName = rs.getString("author_name");
 
-				BookVo bookVo = new BookVo(bookId, Title, Pubs, pubDate, authorId);
+				BookVo bookVo = new BookVo(bookId, Title, Pubs, pubDate, authorName);
 
 				arrayList.add(bookVo);
 			}

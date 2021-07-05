@@ -73,7 +73,6 @@ public class AuthorDao {
 			}
 			this.close();
 			// 4.결과처리
-			
 			return count;
 		}
 

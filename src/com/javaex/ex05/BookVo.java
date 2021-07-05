@@ -8,12 +8,31 @@ public class BookVo {
 	private String pubs;
 	private String pubDate;
 	private int authorId;
+	private String authorName;
+	private String authorDesc;
 
 	// Constructor
 	public BookVo() {
 		super();
 	}
 
+	public BookVo(String title, String pubs, String pubDate, int authorId) {
+		super();
+		this.title = title;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.authorId = authorId;
+	}
+	
+	public BookVo(int bookId, String title, String pubs, String pubDate, String authorName) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.authorName = authorName;
+	}
+	
 	public BookVo(int bookId, String title, String pubs, String pubDate, int authorId) {
 		super();
 		this.bookId = bookId;
@@ -44,6 +63,22 @@ public class BookVo {
 
 	public int getAuthorId() {
 		return authorId;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public String getAuthorDesc() {
+		return authorDesc;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+	public void setAuthorDesc(String authorDesc) {
+		this.authorDesc = authorDesc;
 	}
 
 	public void setBookId(int bookId) {
